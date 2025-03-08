@@ -25,7 +25,7 @@ func parsePackage(data string) (int, time.Duration, error) {
 	steps, err := strconv.Atoi(slice[0])
 	if err != nil {
 
-		return 0, 0, fmt.Errorf("сan not convert string into integer")
+		return 0, 0, fmt.Errorf("conversion error: %w", err)
 	}
 
 	if steps <= 0 {
@@ -47,10 +47,8 @@ func parsePackage(data string) (int, time.Duration, error) {
 
 func DayActionInfo(data string, weight, height float64) string {
 	steps, duration, err := parsePackage(data)
-
 	if err != nil {
-
-		log.Fatal(err)
+		log.Println(err) // Логируем ошибку
 		return ""
 	}
 
